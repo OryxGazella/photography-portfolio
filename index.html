@@ -117,9 +117,15 @@
 			<div class="tab-pane" id="<%= name %>">
 				<div class="container">
 					<div class="row">
-						<% for(var photo in photos) { %>
-							<div class="span2"><img src="img/thumbnails/<%= photos[photo].thumbnail %>" /></div>
-						<% } %>
+							<ul class="thumbnails">
+										<% for(var photo in photos) { %>
+												<li class="span2">
+												<a href="<%= photos[photo].thumbnail %>" class="thumbnail">	
+																<img src="img/thumbnails/<%= photos[photo].thumbnail %>" alt="">
+														</a>	
+													</li>
+										<% } %>
+							  </ul>
 					</div>
 				</div>
 			</div>
