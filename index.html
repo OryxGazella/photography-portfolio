@@ -54,15 +54,15 @@
 						"photos": [
 						{
 							"thumbnail": "arg_01.png",
-							"image": "arg_full_01.png"
+							"image": "arg_full_01.jpg"
 						},
 						{
 							"thumbnail": "arg_02.png",
-							"image": "arg_full_02.png"
+							"image": "arg_full_02.jpg"
 						},
 						{
 							"thumbnail": "arg_03.png",
-							"image": "arg_full_03.png"
+							"image": "arg_full_03.jpg"
 						}
 						]
 					}
@@ -92,7 +92,7 @@
 										<% for(var photo in photos) { %>
 												<li class="span2">
 												<a data-big="img/full/<%= photos[photo].image%>" href="#" class="thumbnail">	
-																<img src="img/thumbnails/<%= photos[photo].thumbnail %>" alt="">
+																<img src="img/thumbnails/<%= photos[photo].thumbnail %>" alt="" />
 														</a>	
 													</li>
 										<% } %>
