@@ -1,0 +1,1 @@
+(function(){dust.register("gallery-tab.html",body_0);function body_0(chk,ctx){return chk.write("<li><a href=\"#").reference(ctx.get("name"),ctx,"h").write("\" data-toggle=\"tab\">").reference(ctx.get("name"),ctx,"h").write("</a></li>");}return body_0;})();

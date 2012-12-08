@@ -1,0 +1,17 @@
+<div class="tab-pane" id="{name}">
+	<div calss="container">
+		{#groups}
+			<div class="row">
+				<ul class="thumbnails">
+					{#photos}
+						<li class="span2">
+							<a data-big="img/full/{image}" href="#" class="thumbnail">
+								<img src="img/thumbnails/{thumbnail}" alt="" />
+							</a>
+						</li>
+					{/photos}
+				</ul>
+			</div>
+		{/groups}
+	</div>
+</div>

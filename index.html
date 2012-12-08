@@ -24,7 +24,6 @@
 		  </li>
 		</ul>
 		<div class="tab-content" id="tab-contents" >
-
 			<div class="tab-pane" id="home">
 				TK, have a big hero panel here. One big picture with a blurb or something.
 			</div>
@@ -34,54 +33,58 @@
 			</div>
 		</div>
 
-		<!-- Modal -->
 		<div id="lightbox" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-header">
-		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		  </div>
-		  <div class="modal-body">
-			  <img id="lightbox-image">
-		  </div>
-		  <div class="modal-footer">
-		    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		  </div>
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		</div>
+		<div class="modal-body">
+			<img id="lightbox-image">
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
 		</div>
 		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.2/underscore-min.js"></script>
+		<script src="js/dust-core-1.1.1.js"></script>
 
 		<script>
 
 			$(function() {
 				$('#mainTab a:last').tab('show');
-				var galleries = 
-					[
-					
-					{
-						"name" : "Argentina",
-						"photos": [
+				var galleries = [
 						{
-							"thumbnail": "arg_01.png",
-							"image": "arg_full_01.jpg"
-						},
-						{
-							"thumbnail": "arg_02.png",
-							"image": "arg_full_02.jpg"
-						},
-						{
-							"thumbnail": "arg_03.png",
-							"image": "arg_full_03.jpg"
+							"name" : "Argentina",
+							"groups":[
+								{
+									"photos": [
+										{
+											"thumbnail": "arg_01.png",
+											"image": "arg_full_01.jpg"
+										},
+										{
+											"thumbnail": "arg_02.png",
+											"image": "arg_full_02.jpg"
+										},
+										{
+											"thumbnail": "arg_03.png",
+											"image": "arg_full_03.jpg"
+										}
+									]
+								}
+							]
 						}
-						]
-					}
 					];
 
-				gallery_view = $("#gallery-template").html();
-				dropdown_view = $("#gallery-tab-template").html();
 				$.each(galleries, function(index, gallery){
-					$('#galleries').append(_.template(dropdown_view, gallery));
-					$('#tab-contents').append(_.template(gallery_view, gallery));
+					dust.render("galleries.html", gallery, function(err, out) {
+						$('#tab-contents').append(out);
+					});
+
+					dust.render("gallery-tab.html", gallery, function(err, out) {
+						$('#galleries').append(out);
+					});
 				});
 
 				$('.thumbnails a').click(function(event){
@@ -95,27 +98,8 @@
 		</script>
 
 		<!-- Templates -->
-		<script type="text/template" id="gallery-template">
-			<div class="tab-pane" id="<%= name %>">
-				<div class="container">
-					<div class="row">
-							<ul class="thumbnails">
-										<% for(var photo in photos) { %>
-												<li class="span2">
-												<a data-big="img/full/<%= photos[photo].image%>" href="#" class="thumbnail">	
-																<img src="img/thumbnails/<%= photos[photo].thumbnail %>" alt="" />
-														</a>	
-													</li>
-										<% } %>
-							  </ul>
-					</div>
-				</div>
-			</div>
-		</script>
+		<script src="templates/galleries.js"></script>
+		<script src="templates/gallery-tab.js"></script>
 
-
-		<script type="text/template" id="gallery-tab-template">
-			<li><a href="#<%= name %>" data-toggle="tab"><%= name %></a></li>
-		</script>
 	</body>
 </html>
